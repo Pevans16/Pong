@@ -23,7 +23,7 @@ public class Board extends JPanel implements Runnable {
   private Thread animator;
 
   // Initialize all of your actors here: players, enemies, obstacles, etc.
-  private Astronaut actor;
+  private Paddle player;
 
   /**
    * Initialize the board
@@ -47,27 +47,10 @@ public class Board extends JPanel implements Runnable {
     setPreferredSize(getPreferredSize());
     setFocusable(true);
     // Initialize all actors below here
-    actor = new Astronaut();
+    player = new Paddle();
   }
 
-  /**
-   * This will step through all the bullets and have them act. If the bullet is
-   * out of bounds, it will remove them from the ArrayList.
-   */
-  public void manageBullets() {
-    ArrayList<Bullet> bullets = actor.getBullets();
-    for (int i = 0; i < bullets.size(); i++) {
-      Bullet bill = bullets.get(i);
-      bill.act();
-      // is Bill out of bounds?
-      if (bill.getX() < 0 || bill.getX() > Utility.gameWidth
-          || bill.getY() < 0 || bill.getY() > Utility.gameHeight) {
-        bullets.remove(i);
-      }
-    }
-
-  }
-
+  
   /**
    * This method will assign the BACKGROUND_FILE_NAME as the background of the
    * JPanel. The background.png file will determine the resolution of your screen.
@@ -112,13 +95,9 @@ public class Board extends JPanel implements Runnable {
     g2d.drawImage(background, 0, 0, Utility.scale(background.getWidth()), Utility.scale(background.getHeight()), this);
 
     // call other drawing stuff here
-    actor.draw(g2d, this);
+    player.draw(g2d, this);
     // get the array list of bullets
-    ArrayList<Bullet> bullets = actor.getBullets();
-    // draw them all
-    for (Bullet bill : bullets) {
-      bill.draw(g2d, this);
-    }
+    
 
     // This method will ensure that the display is up to date
     Toolkit.getDefaultToolkit().sync();
@@ -133,10 +112,10 @@ public class Board extends JPanel implements Runnable {
     // death and other cases appropriately
     checkCollisions();
     // Have all of your actor attributes act here.
-    actor.act();
-    // Manage your bullets
-    manageBullets();
+    player.act();
   }
+  
+  
 
   /**
    * This method will start the thread for the animation.
@@ -231,7 +210,7 @@ public class Board extends JPanel implements Runnable {
     @Override
     public void keyReleased(KeyEvent e) {
       // add all objects that care about keys being released here
-      actor.keyReleased(e);
+      player.keyReleased(e);
     }
 
     /**
@@ -243,7 +222,7 @@ public class Board extends JPanel implements Runnable {
     @Override
     public void keyPressed(KeyEvent e) {
       // add all objects that care about keys being pressed here
-      actor.keyPressed(e);
+      player.keyPressed(e);
     }
   }
 }
