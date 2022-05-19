@@ -63,6 +63,7 @@ public class Board extends JPanel {
   private void initBoard() {
     // Initialize all of your actors here: players, enemies, obstacles, etc.
     Utility.castAndCrew.add(new Paddle());
+    Utility.castAndCrew.add(new Ball());
   }
 
   /**
