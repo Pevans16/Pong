@@ -6,7 +6,7 @@ public class Paddle extends Actor {
     private final static String sprite = "images/paddle.png";
 
     public Paddle() {
-        super(sprite, 10, 20);
+        super(sprite, 10, 35, 4);
     }
 
     /**
@@ -33,7 +33,7 @@ public class Paddle extends Actor {
     }
 
     public void act(){
-        if (getY()+getDY() <0){
+        if (getY()+getDY() <35||getY()+getDY() >Utility.gameHeight-35){
             setDY(0);
         }
         super.act();

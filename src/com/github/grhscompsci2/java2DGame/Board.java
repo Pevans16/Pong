@@ -24,6 +24,8 @@ public class Board extends JPanel implements Runnable {
 
   // Initialize all of your actors here: players, enemies, obstacles, etc.
   private Paddle player;
+  private Ball ball;
+
 
   /**
    * Initialize the board
@@ -48,6 +50,7 @@ public class Board extends JPanel implements Runnable {
     setFocusable(true);
     // Initialize all actors below here
     player = new Paddle();
+    ball = new Ball();
   }
 
   
@@ -97,6 +100,7 @@ public class Board extends JPanel implements Runnable {
     // call other drawing stuff here
     player.draw(g2d, this);
     // get the array list of bullets
+    ball.draw(g2d, this);
     
 
     // This method will ensure that the display is up to date
@@ -113,6 +117,7 @@ public class Board extends JPanel implements Runnable {
     checkCollisions();
     // Have all of your actor attributes act here.
     player.act();
+    ball.act();
   }
   
   

@@ -9,7 +9,7 @@ import java.util.ArrayList;
  * bullet ArrayList.
  */
 public class Astronaut extends Actor {
-  public ArrayList<Bullet> bullets = new ArrayList<>();
+  public ArrayList<Ball> bullets = new ArrayList<>();
   private final static String upImg = "images/astronaut_up.png";
   private final static String downImg = "images/astronaut_down.png";
   private final static String leftImg = "images/astronaut_left.png";
@@ -102,7 +102,7 @@ public class Astronaut extends Actor {
     }
     // Create a new bullet in the bullets ArrayList that has the correct position
     // and movement direction.
-    bullets.add(new Bullet(getX(), getY(), vX, vY));
+    //bullets.add(new Ball(getX(), getY(), vX, vY));
   }
 
   /**
@@ -111,7 +111,7 @@ public class Astronaut extends Actor {
    * 
    * @return
    */
-  public ArrayList<Bullet> getBullets() {
+  public ArrayList<Ball> getBullets() {
     return bullets;
   }
 }
