@@ -47,6 +47,9 @@ public class Board extends JPanel implements Runnable {
     loadBackground();
     // set the size of the panel to the size of the background
     setPreferredSize(getPreferredSize());
+    // Update the scale based on the size of the JPanel
+    Utility.updateScale(new Dimension(background.getWidth(), background.getHeight()), getSize());
+    //Allow us to focus on this JPanel
     setFocusable(true);
     // Initialize all actors below here
     player = new Paddle();
@@ -64,7 +67,6 @@ public class Board extends JPanel implements Runnable {
     try {
       this.background = ImageIO.read(Board.class.getResource(BACKGROUND_FILE_NAME));
     } catch (IOException e) {
-      // TODO Auto-generated catch block
       e.printStackTrace();
     }
   }
