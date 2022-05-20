@@ -9,6 +9,7 @@ import java.awt.Graphics;
 import java.awt.image.*;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.awt.*;
 
 /**
@@ -49,7 +50,7 @@ public class Board extends JPanel implements Runnable {
     setPreferredSize(getPreferredSize());
     // Update the scale based on the size of the JPanel
     Utility.updateScale(new Dimension(background.getWidth(), background.getHeight()), getSize());
-    //Allow us to focus on this JPanel
+    // Allow us to focus on this JPanel
     setFocusable(true);
     // Initialize all actors below here
     player = new Paddle();
@@ -112,8 +113,10 @@ public class Board extends JPanel implements Runnable {
   /**
    * This method is called once per frame. This will allow us to advance the game
    * logic every frame so the actors move and react to input.
+   * 
+   * @param deltaTime
    */
-  private void act() {
+  private void act(float deltaTime) {
     // Check for collisions between actors. Do it before they act so you can handle
     // death and other cases appropriately
     checkCollisions();
@@ -145,19 +148,20 @@ public class Board extends JPanel implements Runnable {
     long beforeTime;
     long timeDiff;
     long sleep;
+    float deltaTime = 0;
     while (true) {
       // Sample the current time before act() and repaint() are called
-      beforeTime = System.currentTimeMillis();
+      beforeTime = System.nanoTime();
 
       // update all actors
-      act();
+      act(deltaTime);
       // force a repaint
       repaint();
 
       // how long did that take?
-      timeDiff = System.currentTimeMillis() - beforeTime;
+      timeDiff = System.nanoTime() - beforeTime;
       // we want to wait a consistent amount of time, so subtract timeDiff from DELAY
-      sleep = DELAY - timeDiff;
+      sleep = (DELAY - timeDiff) / 1000000;
 
       // If we went too long, only wait 2 milliseconds for garbage collection.
       if (sleep < 0) {
@@ -173,6 +177,7 @@ public class Board extends JPanel implements Runnable {
         JOptionPane.showMessageDialog(this, msg, "Error",
             JOptionPane.ERROR_MESSAGE);
       }
+      deltaTime = (System.nanoTime() - beforeTime) / 1000000000f;
     }
   }
 
