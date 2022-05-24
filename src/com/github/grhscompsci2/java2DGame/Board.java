@@ -5,7 +5,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 import com.github.grhscompsci2.java2DGame.actors.Actor;
-import com.github.grhscompsci2.java2DGame.actors.Astronaut;
+import com.github.grhscompsci2.java2DGame.actors.Ball;
 import com.github.grhscompsci2.java2DGame.actors.Paddle;
 
 import java.awt.Graphics;
